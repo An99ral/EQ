@@ -126,7 +126,7 @@ import {
   XChainModifyBridge,
   validateXChainModifyBridge,
 } from './XChainModifyBridge'
-
+import {FundingPoolCreate,validateFundingPoolCreate} from './FundingPoolCreate'
 /**
  * Transactions that can be submitted by clients
  *
@@ -195,6 +195,7 @@ export type SubmittableTransaction =
   | XChainCreateBridge
   | XChainCreateClaimID
   | XChainModifyBridge
+  | FundingPoolCreate
 
 /**
  * Transactions that can only be created by validators.
@@ -509,6 +510,9 @@ export function validate(transaction: Record<string, unknown>): void {
 
     case 'XChainModifyBridge':
       validateXChainModifyBridge(tx)
+      break
+    case 'fundingPoolCreate':
+      validateFundingPoolCreate(tx)
       break
 
     default:

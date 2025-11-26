@@ -521,7 +521,7 @@ export function validateBaseTransaction(
     throw new ValidationError('BaseTransaction: TransactionType not string')
   }
 
-  if (!TRANSACTION_TYPES.includes(common.TransactionType)) {
+  if (!Object.keys(TRANSACTION_TYPES).includes(common.TransactionType)) {
     throw new ValidationError(
       `BaseTransaction: Unknown TransactionType ${common.TransactionType}`,
     )

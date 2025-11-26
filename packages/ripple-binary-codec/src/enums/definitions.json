@@ -70,6 +70,7 @@
         "type": "UInt16"
       }
     ],
+    
     [
       "TransactionType",
       {
@@ -78,6 +79,46 @@
         "isVLEncoded": false,
         "nth": 2,
         "type": "UInt16"
+      }
+    ],
+    [
+      "PoolName",{
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 34,
+        "type": "Blob"
+      }
+    ],
+    [
+      "PoolData",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 35,
+        "type": "Blob"
+      }
+    ],
+    [
+      "Stages",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 34,
+        "type": "STArray"
+
+      }
+    ],
+    [
+      "PoolName",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 1,
+        "type": "Blob"
       }
     ],
     [
@@ -3354,7 +3395,8 @@
     "XChainCommit": 42,
     "XChainCreateBridge": 48,
     "XChainCreateClaimID": 41,
-    "XChainModifyBridge": 47
+    "XChainModifyBridge": 47,
+    "FundingPoolCreate": 151
   },
   "TYPES": {
     "AccountID": 8,
