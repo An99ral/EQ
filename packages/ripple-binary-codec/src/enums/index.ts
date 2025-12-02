@@ -18,7 +18,8 @@ const Field = DEFAULT_DEFINITIONS.field
 /*
  * @brief: All valid transaction types
  */
-const TRANSACTION_TYPES = DEFAULT_DEFINITIONS.transactionNames
+const TRANSACTION_TYPES = DEFAULT_DEFINITIONS.transactionType
+const TRANSACTION_TYPE_NAMES = DEFAULT_DEFINITIONS.transactionNames
 
 export {
   Bytes,
@@ -31,4 +32,5 @@ export {
   TransactionResult,
   TransactionType,
   TRANSACTION_TYPES,
+  TRANSACTION_TYPE_NAMES,
 }

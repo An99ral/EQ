@@ -1,5 +1,5 @@
-import { encodeForSigningClaim } from 'ripple-binary-codec'
-import { sign } from 'ripple-keypairs'
+import { encodeForSigningClaim } from 'eq-binary-codec'
+import { sign } from 'eq-keypairs'
 
 import { Wallet } from './index'
 

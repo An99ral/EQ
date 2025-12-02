@@ -1,4 +1,4 @@
-import { decode } from 'ripple-binary-codec'
+import { decode } from 'eq-binary-codec'
 
 import {
   CreatedNode,

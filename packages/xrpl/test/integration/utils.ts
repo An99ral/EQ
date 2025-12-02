@@ -119,7 +119,7 @@ export async function isAmendmentEnabled(
 
     // Amendment not found
     return false
-  } catch (error) {
+  } catch (error) { 
     // If the feature command fails, assume the amendment is not enabled
     return false
   }

@@ -1,6 +1,6 @@
 {
-  "name": "ripple-keypairs",
-  "version": "2.0.0",
+  "name": "eq-keypairs",
+  "version": "2.0.3",
   "description": "Cryptographic key pairs for the XRP Ledger",
   "scripts": {
     "build": "tsc --build tsconfig.build.json",
@@ -12,7 +12,7 @@
   },
   "files": [
     "dist/*",
-    "src/*"
+    "src/*" 
   ],
   "main": "dist/",
   "directories": {

@@ -1,8 +1,8 @@
 /* eslint-disable max-lines -- common utility file */
 
 import { HEX_REGEX } from '@xrplf/isomorphic/utils'
-import { isValidClassicAddress, isValidXAddress } from 'ripple-address-codec'
-import { TRANSACTION_TYPES } from 'ripple-binary-codec'
+import { isValidClassicAddress, isValidXAddress } from 'eq-address-codec'
+import { TRANSACTION_TYPES } from 'eq-binary-codec'
 
 import { ValidationError } from '../../errors'
 import {

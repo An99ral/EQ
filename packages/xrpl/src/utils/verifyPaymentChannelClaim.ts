@@ -1,5 +1,5 @@
-import { encodeForSigningClaim } from 'ripple-binary-codec'
-import { verify } from 'ripple-keypairs'
+import { encodeForSigningClaim } from 'eq-binary-codec'
+import { verify } from 'eq-keypairs'
 
 import { xrpToDrops } from './xrpConversion'
 

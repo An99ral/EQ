@@ -126,7 +126,7 @@ import {
   XChainModifyBridge,
   validateXChainModifyBridge,
 } from './XChainModifyBridge'
-import {FundingPoolCreate,validateFundingPoolCreate} from './FundingPoolCreate'
+import { FundingPoolCreate, validateFundingPoolCreate } from './FundingPoolCreate'
 /**
  * Transactions that can be submitted by clients
  *
@@ -511,13 +511,13 @@ export function validate(transaction: Record<string, unknown>): void {
     case 'XChainModifyBridge':
       validateXChainModifyBridge(tx)
       break
-    case 'fundingPoolCreate':
+    case 'FundingPoolCreate':
       validateFundingPoolCreate(tx)
       break
 
     default:
       throw new ValidationError(
-        `Invalid field TransactionType: ${tx.TransactionType}`,
+        `Invalid field TransactionType transactionts : ${tx.TransactionType}`,
       )
   }
 }

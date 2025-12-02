@@ -1,10 +1,11 @@
 import { ValidationError } from '../../errors'
-
+import { Amount, MPTAmount } from '../common'
 
 import {
   Account,
   BaseTransaction,
   isAccount,
+  isAmount,
   isNumber,
   validateBaseTransaction,
   validateOptionalField,
@@ -18,8 +19,9 @@ import {
  */
 
 export interface FundingPoolCreate extends BaseTransaction {
-  TransactionType: 'FundingPoolCreate' // Ahora opcional
-  Destination: Account 
+  TransactionType: 'FundingPoolCreate'
+  Amount: Amount | MPTAmount
+  Destination: Account
   CancelAfter?: number
   FinishAfter?: number
   PoolName?: string
@@ -35,25 +37,14 @@ export interface FundingPoolCreate extends BaseTransaction {
 }
 
 export function validateFundingPoolCreate(tx: Record<string, unknown>): void {
-
   validateBaseTransaction(tx)
 
-  // Permitir TransactionType como string o número (151) de forma segura para TypeScript
-  if (!(
-    (typeof tx.TransactionType === 'string' && tx.TransactionType === 'FundingPoolCreate') ||
-    (typeof tx.TransactionType === 'number' && tx.TransactionType === 151)
-  )) {
-    throw new ValidationError('FundingPoolCreate: TransactionType inválido')
-  }
-
-  console.log('Validando Destination en FundingPoolCreate')
-
+  validateRequiredField(tx, 'Amount', isAmount)
   validateRequiredField(tx, 'Destination', isAccount)
 
   validateOptionalField(tx, 'CancelAfter', isNumber)
   validateOptionalField(tx, 'FinishAfter', isNumber)
   validateOptionalField(tx, 'TransferRate', isNumber)
-  
 
   if (tx.Stages !== undefined) {
     if (!Array.isArray(tx.Stages)) {
@@ -71,5 +62,4 @@ export function validateFundingPoolCreate(tx: Record<string, unknown>): void {
       }
     })
   }
-  console.log('Validación completa de FundingPoolCreate')
 }

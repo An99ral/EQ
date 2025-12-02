@@ -25,6 +25,7 @@ import { XChainModifyBridgeFlags } from '../transactions/XChainModifyBridge'
 
 import { isFlagEnabled } from '.'
 
+
 /**
  * Convert an AccountRoot Flags number into an interface for easy interpretation.
  *
@@ -66,6 +67,7 @@ const txToFlag = {
   TrustSet: TrustSetFlags,
   VaultCreate: VaultCreateFlags,
   XChainModifyBridge: XChainModifyBridgeFlags,
+ 
 }
 
 function isTxToFlagKey(

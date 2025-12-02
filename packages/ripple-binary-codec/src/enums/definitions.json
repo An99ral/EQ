@@ -1,6 +1,6 @@
 {
   "FIELDS": [
-    [
+      [
       "Generic",
       {
         "isSerialized": false,
@@ -70,7 +70,6 @@
         "type": "UInt16"
       }
     ],
-    
     [
       "TransactionType",
       {
@@ -82,7 +81,8 @@
       }
     ],
     [
-      "PoolName",{
+      "PoolName",
+      {
         "isSerialized": true,
         "isSigningField": true,
         "isVLEncoded": false,
@@ -97,27 +97,6 @@
         "isSigningField": true,
         "isVLEncoded": false,
         "nth": 35,
-        "type": "Blob"
-      }
-    ],
-    [
-      "Stages",
-      {
-        "isSerialized": true,
-        "isSigningField": true,
-        "isVLEncoded": false,
-        "nth": 34,
-        "type": "STArray"
-
-      }
-    ],
-    [
-      "PoolName",
-      {
-        "isSerialized": true,
-        "isSigningField": true,
-        "isVLEncoded": false,
-        "nth": 1,
         "type": "Blob"
       }
     ],
@@ -3100,6 +3079,46 @@
         "nth": 257,
         "type": "Metadata"
       }
+    ],
+    [
+      "Stages",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 34,
+        "type": "STArray"
+      }
+    ],
+    [
+      "Stage",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 37,
+        "type": "STObject"
+      }
+    ],
+    [
+      "StageIndex",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 54,
+        "type": "UInt32"
+      }
+    ],
+    [
+      "StageData",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 33,
+        "type": "Blob"
+      }
     ]
   ],
   "LEDGER_ENTRY_TYPES": {
@@ -3131,7 +3150,9 @@
     "Ticket": 84,
     "Vault": 132,
     "XChainOwnedClaimID": 113,
-    "XChainOwnedCreateAccountClaimID": 116
+    "XChainOwnedCreateAccountClaimID": 116,
+    "FundingPool" : 134
+   
   },
   "TRANSACTION_RESULTS": {
     "tecAMM_ACCOUNT": 168,

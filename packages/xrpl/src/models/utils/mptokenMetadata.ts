@@ -371,7 +371,7 @@ export function encodeMPTokenMetadata(
 
   return stringToHex(stableStringify(input)).toUpperCase()
 }
-
+ 
 /**
  * Expands compact field names to their long form equivalents.
  * Reverse operation of {@link shortenKeys}.
@@ -468,7 +468,7 @@ export function decodeMPTokenMetadata(input: string): MPTokenMetadata {
   return output as unknown as MPTokenMetadata
 }
 
-/**
+/** 
  * Validates {@link MPTokenMetadata} adheres to XLS-89 standard.
  *
  * @param input - Hex encoded {@link MPTokenMetadata}.

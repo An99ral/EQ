@@ -1,5 +1,5 @@
-import { encode, encodeForSigningBatch } from 'ripple-binary-codec'
-import { sign } from 'ripple-keypairs'
+import { encode, encodeForSigningBatch } from 'eq-binary-codec'
+import { sign } from 'eq-keypairs'
 
 import { ValidationError } from '../errors'
 import { Batch, Transaction, validate } from '../models'
@@ -81,7 +81,7 @@ export function signMultiBatch(
 
   const involvedAccounts = new Set(
     transaction.RawTransactions.map((raw) => raw.RawTransaction.Account),
-  )
+  ) 
   if (!involvedAccounts.has(batchAccount)) {
     throw new ValidationError(
       'Must be signing for an address submitting a transaction in the Batch.',

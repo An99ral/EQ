@@ -118,7 +118,7 @@ export interface MPTokenIssuanceCreate extends BaseTransaction {
    * While adherence to the XLS-89d format is not mandatory, non-compliant metadata
    * may not be discoverable by ecosystem tools such as explorers and indexers.
    */
-  MPTokenMetadata?: string
+  MPTokenMetadata?: string  
 
   Flags?: number | MPTokenIssuanceCreateFlagsInterface
 }

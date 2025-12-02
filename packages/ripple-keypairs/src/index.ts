@@ -15,7 +15,7 @@ import type { Algorithm, HexString, KeyPair, SigningScheme } from './types'
 import {
   getAlgorithmFromPrivateKey,
   getAlgorithmFromPublicKey,
-} from './utils/getAlgorithmFromKey'
+} from './utils/getAlgorithmFromKey'   
 
 import secp256k1 from './signing-schemes/secp256k1'
 import ed25519 from './signing-schemes/ed25519'

@@ -1,5 +1,5 @@
-import { classicAddressToXAddress } from 'ripple-address-codec'
-import { deriveKeypair, deriveAddress } from 'ripple-keypairs'
+import { classicAddressToXAddress } from 'eq-address-codec'
+import { deriveKeypair, deriveAddress } from 'eq-keypairs'
 
 /**
  * Derive an X-Address from a public key and a destination tag.

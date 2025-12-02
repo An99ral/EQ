@@ -1,4 +1,4 @@
-import { isValidClassicAddress } from 'ripple-address-codec'
+import { isValidClassicAddress } from 'eq-address-codec'
 
 import type { Client } from '../client'
 import { XRPLFaucetError } from '../errors'

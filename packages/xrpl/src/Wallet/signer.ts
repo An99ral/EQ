@@ -1,5 +1,5 @@
-import { encode, encodeForSigning } from 'ripple-binary-codec'
-import { verify } from 'ripple-keypairs'
+import { encode, encodeForSigning } from 'eq-binary-codec'
+import { verify } from 'eq-keypairs'
 
 import { ValidationError } from '../errors'
 import { Signer } from '../models/common'
@@ -36,8 +36,8 @@ function multisign(transactions: Array<Transaction | string>): string {
      */
     // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- validate does not accept Transaction type
     validate(tx as unknown as Record<string, unknown>)
-    if (tx.Signers == null || tx.Signers.length === 0) {
-      throw new ValidationError(
+    if (tx.Signers == null || tx.Signers.length === 0) {      
+      throw new ValidationError(   
         "For multisigning all transactions must include a Signers field containing an array of signatures. You may have forgotten to pass the 'forMultisign' parameter when signing.",
       )
     }

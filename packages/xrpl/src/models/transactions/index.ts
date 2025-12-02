@@ -131,3 +131,6 @@ export {
   XChainModifyBridgeFlags,
   XChainModifyBridgeFlagsInterface,
 } from './XChainModifyBridge'
+export { FundingPoolCreate } from './FundingPoolCreate'
+
+

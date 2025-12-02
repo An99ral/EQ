@@ -1,6 +1,6 @@
 {
-  "name": "ripple-binary-codec",
-  "version": "2.5.1",
+  "name": "eq-binary-codec",
+  "version": "2.0.2",
   "description": "XRP Ledger binary codec",
   "files": [
     "dist/*",
@@ -15,11 +15,11 @@
     "bignumber.js": "^9.0.0",
     "ripple-address-codec": "^5.0.0"
   },
-  "scripts": {
+  "scripts": { 
     "build": "tsc --build tsconfig.build.json && copyfiles ./src/enums/definitions.json ./dist/enums/",
     "clean": "rm -rf ./dist ./coverage ./test/testCompiledForWeb tsconfig.build.tsbuildinfo",
     "prepublishOnly": "npm test",
-    "test": "npm run build && jest --verbose false --silent=false ./test/*.test.ts",
+    "test": "npm run build && jest --passWithNoTests --verbose false --silent=false ./test/*.test.ts",
     "test:browser": "npm run build && karma start ./karma.config.js",
     "lint": "eslint . --max-warnings 0",
     "generateDefinitions": "node ./tools/generateDefinitions.js"

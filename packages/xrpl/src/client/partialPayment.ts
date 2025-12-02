@@ -1,5 +1,5 @@
 import BigNumber from 'bignumber.js'
-import { decode } from 'ripple-binary-codec'
+import { decode } from 'eq-binary-codec'
 
 import type {
   TransactionEntryResponse,

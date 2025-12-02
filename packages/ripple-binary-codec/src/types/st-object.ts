@@ -126,9 +126,20 @@ class STObject extends SerializedType {
       )
     }
 
+    // DEBUG: Log las claves que se van a buscar en definitions.field
+    if (typeof globalThis !== 'undefined' && globalThis.XRPL_DEBUG_SIGNING) {
+      console.log('[eq-binary][st-object] Claves a buscar en definitions.field:', Object.keys(xAddressDecoded))
+    }
+
     let sorted = Object.keys(xAddressDecoded)
       .map((f: string): FieldInstance | undefined => {
+        if (typeof globalThis !== 'undefined' && globalThis.XRPL_DEBUG_SIGNING) {
+          console.log('[eq-binary][st-object] Buscando field:', f, 'en definitions.field:', !!definitions.field[f])
+        }
         if (!(f in definitions.field)) {
+          if (typeof globalThis !== 'undefined' && globalThis.XRPL_DEBUG_SIGNING) {
+            console.error('[eq-binary][st-object] FALTA FIELD:', f, 'Keys disponibles:', Object.keys(definitions.field).filter(k => k[0] === f[0]))
+          }
           if (f[0] === f[0].toLowerCase()) return undefined
           throw new Error(`Field ${f} is not defined in the definitions`)
         }
@@ -155,8 +166,7 @@ class STObject extends SerializedType {
 
       if (associatedValue == undefined) {
         throw new TypeError(
-          `Unable to interpret "${field.name}: ${
-            xAddressDecoded[field.name]
+          `Unable to interpret "${field.name}: ${xAddressDecoded[field.name]
           }".`,
         )
       }

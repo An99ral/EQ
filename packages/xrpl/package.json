@@ -1,6 +1,6 @@
 {
-  "name": "xrpl",
-  "version": "4.4.3",
+  "name": "eq-xrpl",
+  "version": "2.0.13",
   "license": "ISC",
   "description": "A TypeScript/JavaScript API for interacting with the XRP Ledger in Node.js and the browser",
   "files": [
@@ -15,7 +15,7 @@
   "unpkg": "build/xrpl-latest-min.js",
   "jsdelivr": "build/xrpl-latest-min.js",
   "types": "dist/npm/index.d.ts",
-  "directories": {
+  "directories": {  
     "test": "test"
   },
   "browser": {
@@ -28,9 +28,9 @@
     "@xrplf/secret-numbers": "^2.0.0",
     "bignumber.js": "^9.0.0",
     "eventemitter3": "^5.0.1",
-    "ripple-address-codec": "^5.0.0",
-    "ripple-binary-codec": "^2.5.0",
-    "ripple-keypairs": "^2.0.0",
+    "eq-address-codec": "^2.0.2",
+    "eq-binary-codec": "^2.0.2",
+    "eq-keypairs": "^2.0.3",
     "fast-json-stable-stringify": "^2.1.0"
   },
   "devDependencies": {

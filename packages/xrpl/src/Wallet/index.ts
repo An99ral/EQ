@@ -8,18 +8,18 @@ import {
   isValidXAddress,
   xAddressToClassicAddress,
   encodeSeed,
-} from 'ripple-address-codec'
+} from 'eq-address-codec'
 import {
   encodeForSigning,
   encodeForMultisigning,
   encode,
-} from 'ripple-binary-codec'
+} from 'eq-binary-codec'
 import {
   deriveAddress,
   deriveKeypair,
   generateSeed,
   sign,
-} from 'ripple-keypairs'
+} from 'eq-keypairs'
 
 import ECDSA from '../ECDSA'
 import { ValidationError } from '../errors'
@@ -384,6 +384,14 @@ export class Wallet {
     tx_blob: string
     hash: string
   } {
+    // DEBUG: Activar logs si window.XRPL_DEBUG_SIGNING = true
+    const XRPL_DEBUG_SIGNING = typeof globalThis !== 'undefined' && Boolean((globalThis as Record<string, unknown>).XRPL_DEBUG_SIGNING)
+    function debugSignLog(step: string, payload?: unknown) {
+      if (XRPL_DEBUG_SIGNING) {
+        console.log(`[eq-xrpl][sign] ${step}`, payload)
+      }
+    }
+
     let multisignAddress: boolean | string = false
     if (typeof multisign === 'string') {
       multisignAddress = multisign
@@ -392,30 +400,37 @@ export class Wallet {
     }
 
     // clean null & undefined valued tx properties
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ensure Transaction flows through
     const tx = omitBy(
       { ...transaction },
       (value) => value == null,
     ) as unknown as Transaction
+    debugSignLog('normalized-tx', tx)
 
     if (tx.TxnSignature || tx.Signers) {
+      debugSignLog('pre-signed-tx', tx)
       throw new ValidationError(
         'txJSON must not contain "TxnSignature" or "Signers" properties',
       )
     }
 
     removeTrailingZeros(tx)
+    debugSignLog('after-removeTrailingZeros', tx)
 
-    /*
-     * This will throw a more clear error for JS users if the supplied transaction has incorrect formatting
-     */
-    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- validate does not accept Transaction type
-    validate(tx as unknown as Record<string, unknown>)
+    // Validación
+    try {
+      validate(tx as unknown as Record<string, unknown>)
+      debugSignLog('after-validate', tx)
+    } catch (err) {
+      debugSignLog('validate-error', err)
+      throw err
+    }
     if (hasFlag(tx, GlobalFlags.tfInnerBatchTxn, 'tfInnerBatchTxn')) {
+      debugSignLog('inner-batch-txn', tx)
       throw new ValidationError('Cannot sign a Batch inner transaction.')
     }
 
     const txToSignAndEncode = { ...tx }
+    debugSignLog('txToSignAndEncode', txToSignAndEncode)
 
     if (multisignAddress) {
       txToSignAndEncode.SigningPubKey = ''
@@ -429,18 +444,30 @@ export class Wallet {
         ),
       }
       txToSignAndEncode.Signers = [{ Signer: signer }]
+      debugSignLog('multisign', signer)
     } else {
       txToSignAndEncode.SigningPubKey = this.publicKey
       txToSignAndEncode.TxnSignature = computeSignature(
         txToSignAndEncode,
         this.privateKey,
       )
+      debugSignLog('single-sign', txToSignAndEncode.TxnSignature)
     }
 
-    const serialized = encode(txToSignAndEncode)
+    let serialized: string
+    try {
+      debugSignLog('encode-input', txToSignAndEncode)
+      serialized = encode(txToSignAndEncode)
+      debugSignLog('encode-success', serialized)
+    } catch (err) {
+      debugSignLog('encode-error', err)
+      throw err
+    }
+    const hash = hashSignedTx(serialized)
+    debugSignLog('sign-result', { tx_blob: serialized, hash })
     return {
       tx_blob: serialized,
-      hash: hashSignedTx(serialized),
+      hash,
     }
   }
 

@@ -69,7 +69,7 @@ export function validateEscrowCreate(tx: Record<string, unknown>): void {
     throw new ValidationError(
       'EscrowCreate: Either CancelAfter or FinishAfter must be specified',
     )
-  }
+  }  
 
   if (tx.FinishAfter === undefined && tx.Condition === undefined) {
     throw new ValidationError(

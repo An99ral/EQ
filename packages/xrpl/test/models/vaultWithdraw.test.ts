@@ -60,7 +60,7 @@ describe('VaultWithdraw', function () {
     assert.doesNotThrow(() => validateVaultWithdraw(tx))
     assert.doesNotThrow(() => validate(tx))
     assertValid(tx)
-  })
+  })  
 
   it('throws w/ invalid Destination', function () {
     // @ts-expect-error for test

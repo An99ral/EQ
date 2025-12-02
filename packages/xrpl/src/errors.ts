@@ -18,7 +18,7 @@ class XrplError extends Error {
    */
   public constructor(message = '', data?: unknown) {
     super(message)
-
+    console.log('Creando XrplError', this.constructor.name)
     this.name = this.constructor.name
     this.message = message
     this.data = data
@@ -29,7 +29,7 @@ class XrplError extends Error {
   }
 
   /**
-   * Converts the Error to a human-readable String form.
+   * Converts the Error to a human-readable String   form.
    *
    * @returns The String output of the Error.
    */
@@ -59,63 +59,63 @@ class XrplError extends Error {
  *
  * @category Errors
  */
-class RippledError extends XrplError {}
+class RippledError extends XrplError { }
 
 /**
  * Error thrown when xrpl.js cannot specify error type.
  *
  * @category Errors
  */
-class UnexpectedError extends XrplError {}
+class UnexpectedError extends XrplError { }
 
 /**
  * Error thrown when xrpl.js has an error with connection to rippled.
  *
  * @category Errors
  */
-class ConnectionError extends XrplError {}
+class ConnectionError extends XrplError { }
 
 /**
  * Error thrown when xrpl.js is not connected to rippled server.
  *
  * @category Errors
  */
-class NotConnectedError extends ConnectionError {}
+class NotConnectedError extends ConnectionError { }
 
 /**
  * Error thrown when xrpl.js has disconnected from rippled server.
  *
  * @category Errors
  */
-class DisconnectedError extends ConnectionError {}
+class DisconnectedError extends ConnectionError { }
 
 /**
  * Error thrown when rippled is not initialized.
  *
  * @category Errors
  */
-class RippledNotInitializedError extends ConnectionError {}
+class RippledNotInitializedError extends ConnectionError { }
 
 /**
  * Error thrown when xrpl.js times out.
  *
  * @category Errors
  */
-class TimeoutError extends ConnectionError {}
+class TimeoutError extends ConnectionError { }
 
 /**
  * Error thrown when xrpl.js sees a response in the wrong format.
  *
  * @category Errors
  */
-class ResponseFormatError extends ConnectionError {}
+class ResponseFormatError extends ConnectionError { }
 
 /**
  * Error thrown when xrpl.js sees a malformed transaction.
  *
  * @category Errors
  */
-class ValidationError extends XrplError {}
+class ValidationError extends XrplError { }
 
 /**
  * Error thrown when a client cannot generate a wallet from the testnet/devnet
@@ -124,7 +124,7 @@ class ValidationError extends XrplError {}
  *
  * @category Errors
  */
-class XRPLFaucetError extends XrplError {}
+class XRPLFaucetError extends XrplError { }
 
 /**
  * Error thrown when xrpl.js cannot retrieve a transaction, ledger, account, etc.
