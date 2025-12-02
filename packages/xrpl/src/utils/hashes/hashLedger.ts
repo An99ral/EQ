@@ -157,6 +157,7 @@ export function hashStateTree(entries: LedgerEntry[]): string {
 
   entries.forEach((ledgerEntry) => {
     const data = encode(ledgerEntry)
+    console.log('ledgerEntry index:', data)
     shamap.addItem(ledgerEntry.index, data, NodeType.ACCOUNT_STATE)
   })
 

@@ -14,12 +14,7 @@ import {
   encodeForMultisigning,
   encode,
 } from 'eq-binary-codec'
-import {
-  deriveAddress,
-  deriveKeypair,
-  generateSeed,
-  sign,
-} from 'eq-keypairs'
+import { deriveAddress, deriveKeypair, generateSeed, sign } from 'eq-keypairs'
 
 import ECDSA from '../ECDSA'
 import { ValidationError } from '../errors'
@@ -384,53 +379,41 @@ export class Wallet {
     tx_blob: string
     hash: string
   } {
-    // DEBUG: Activar logs si window.XRPL_DEBUG_SIGNING = true
-    const XRPL_DEBUG_SIGNING = typeof globalThis !== 'undefined' && Boolean((globalThis as Record<string, unknown>).XRPL_DEBUG_SIGNING)
-    function debugSignLog(step: string, payload?: unknown) {
-      if (XRPL_DEBUG_SIGNING) {
-        console.log(`[eq-xrpl][sign] ${step}`, payload)
-      }
-    }
-
     let multisignAddress: boolean | string = false
     if (typeof multisign === 'string') {
+      console.log('multisign string', multisign)
       multisignAddress = multisign
     } else if (multisign) {
       multisignAddress = this.classicAddress
+      console.log('multisign boolean', multisignAddress)
     }
 
     // clean null & undefined valued tx properties
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- ensure Transaction flows through
     const tx = omitBy(
       { ...transaction },
       (value) => value == null,
     ) as unknown as Transaction
-    debugSignLog('normalized-tx', tx)
-
+    console.log('signing tx', tx)
     if (tx.TxnSignature || tx.Signers) {
-      debugSignLog('pre-signed-tx', tx)
       throw new ValidationError(
         'txJSON must not contain "TxnSignature" or "Signers" properties',
       )
+      console.log('Transaction contains TxnSignature or Signers properties')
     }
 
     removeTrailingZeros(tx)
-    debugSignLog('after-removeTrailingZeros', tx)
-
-    // Validación
-    try {
-      validate(tx as unknown as Record<string, unknown>)
-      debugSignLog('after-validate', tx)
-    } catch (err) {
-      debugSignLog('validate-error', err)
-      throw err
-    }
+    console.log('after removing trailing zeros', tx)
+    /*
+     * This will throw a more clear error for JS users if the supplied transaction has incorrect formatting
+     */
+    // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- validate does not accept Transaction type
+    validate(tx as unknown as Record<string, unknown>)
     if (hasFlag(tx, GlobalFlags.tfInnerBatchTxn, 'tfInnerBatchTxn')) {
-      debugSignLog('inner-batch-txn', tx)
       throw new ValidationError('Cannot sign a Batch inner transaction.')
+      
     }
-
     const txToSignAndEncode = { ...tx }
-    debugSignLog('txToSignAndEncode', txToSignAndEncode)
 
     if (multisignAddress) {
       txToSignAndEncode.SigningPubKey = ''
@@ -444,33 +427,20 @@ export class Wallet {
         ),
       }
       txToSignAndEncode.Signers = [{ Signer: signer }]
-      debugSignLog('multisign', signer)
     } else {
       txToSignAndEncode.SigningPubKey = this.publicKey
       txToSignAndEncode.TxnSignature = computeSignature(
         txToSignAndEncode,
         this.privateKey,
       )
-      debugSignLog('single-sign', txToSignAndEncode.TxnSignature)
     }
-
-    let serialized: string
-    try {
-      debugSignLog('encode-input', txToSignAndEncode)
-      serialized = encode(txToSignAndEncode)
-      debugSignLog('encode-success', serialized)
-    } catch (err) {
-      debugSignLog('encode-error', err)
-      throw err
-    }
-    const hash = hashSignedTx(serialized)
-    debugSignLog('sign-result', { tx_blob: serialized, hash })
+    const serialized = encode(txToSignAndEncode)
+    console.log('serialized tx', serialized)
     return {
       tx_blob: serialized,
-      hash,
+      hash: hashSignedTx(serialized),
     }
   }
-
   /**
    * Verifies a signed transaction offline.
    *
@@ -481,7 +451,6 @@ export class Wallet {
   public verifyTransaction(signedTransaction: Transaction | string): boolean {
     return verifySignature(signedTransaction, this.publicKey)
   }
-
   /**
    * Gets an X-address in Testnet/Mainnet format.
    *

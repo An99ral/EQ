@@ -18,8 +18,8 @@ import {
  */
 
 export interface FundingPoolCreate extends BaseTransaction {
-  TransactionType: 'FundingPoolCreate' // Ahora opcional
-  Destination: Account 
+  TransactionType: 'FundingPoolCreate'
+  Destination: Account
   CancelAfter?: number
   FinishAfter?: number
   PoolName?: string
