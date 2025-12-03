@@ -254,7 +254,7 @@ export async function getSignedTx(
   if (autofill) {
     tx = await client.autofill(tx)
   }
-
+  console.log('Transaction before signing:', tx)
   return wallet.sign(tx).tx_blob
 }
 

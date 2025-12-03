@@ -33,5 +33,6 @@ export function walletFromSecretNumbers(
     updatedOpts.masterAddress = opts.masterAddress
     updatedOpts.algorithm = opts.algorithm ?? ECDSA.secp256k1
   }
+  console.log('Generating wallet from secret numbers with options:', updatedOpts)
   return Wallet.fromSecret(secret, updatedOpts)
 }

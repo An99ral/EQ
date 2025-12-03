@@ -29,31 +29,27 @@ export interface FundingPoolCreate extends BaseTransaction {
   Stages?: Array<{
     Stage: {
       StageIndex: number
-      StageData: string
+      StageData?: string
     }
   }>
 }
 
 export function validateFundingPoolCreate(tx: Record<string, unknown>): void {
-
   validateBaseTransaction(tx)
-
-  // Permitir TransactionType como string o número (151) de forma segura para TypeScript
-  if (!(
-    (typeof tx.TransactionType === 'string' && tx.TransactionType === 'FundingPoolCreate') ||
-    (typeof tx.TransactionType === 'number' && tx.TransactionType === 151)
-  )) {
+  if (
+    !(
+      (typeof tx.TransactionType === 'string' && tx.TransactionType === 'FundingPoolCreate') ||
+      (typeof tx.TransactionType === 'number' && tx.TransactionType === 151)
+    )
+  ) {
     throw new ValidationError('FundingPoolCreate: TransactionType inválido')
   }
-
-  console.log('Validando Destination en FundingPoolCreate')
+  // ...resto de validaciones...
 
   validateRequiredField(tx, 'Destination', isAccount)
-
   validateOptionalField(tx, 'CancelAfter', isNumber)
   validateOptionalField(tx, 'FinishAfter', isNumber)
   validateOptionalField(tx, 'TransferRate', isNumber)
-  
 
   if (tx.Stages !== undefined) {
     if (!Array.isArray(tx.Stages)) {
@@ -63,13 +59,13 @@ export function validateFundingPoolCreate(tx: Record<string, unknown>): void {
       if (
         stage?.Stage === undefined ||
         typeof stage.Stage.StageIndex !== 'number' ||
-        typeof stage.Stage.StageData !== 'string'
+        (stage.Stage.StageData !== undefined &&
+          typeof stage.Stage.StageData !== 'string')
       ) {
         throw new ValidationError(
-          `FundingPoolCreate: Stage[${index}] must contain numeric StageIndex and string StageData`,
+          `FundingPoolCreate: Stage[${index}] must contain Stage.StageIndex (number) and Stage.StageData (string|undefined)`
         )
       }
     })
   }
-  console.log('Validación completa de FundingPoolCreate')
 }

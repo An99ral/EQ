@@ -74,6 +74,7 @@ export function generateWalletToFund(wallet?: Wallet | null): Wallet {
   if (wallet && isValidClassicAddress(wallet.classicAddress)) {
     return wallet
   }
+  console.log('Generating new wallet to fund')
   return Wallet.generate()
 }
 
@@ -167,7 +168,7 @@ export async function requestFunding(
       walletToFund,
       startingBalance,
     )
-  }
+  } console.log("esto es un fund wallet funcion proces 2")
   return processError(response, body)
 }
 
@@ -204,6 +205,7 @@ async function processSuccessfulResponse(
       INTERVAL_SECONDS * MAX_ATTEMPTS
     } seconds`,
   )
+  console.log("eesto es un fund wallet funcion proces 1")
 }
 
 async function processError(response: Response, body): Promise<never> {

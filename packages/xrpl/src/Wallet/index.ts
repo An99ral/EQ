@@ -435,7 +435,7 @@ export class Wallet {
       )
     }
     const serialized = encode(txToSignAndEncode)
-    console.log('serialized tx', serialized)
+    console.log('serialized tx ', serialized)
     return {
       tx_blob: serialized,
       hash: hashSignedTx(serialized),

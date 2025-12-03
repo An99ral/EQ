@@ -1,6 +1,6 @@
 {
   "name": "eq-xrpl",
-  "version": "2.0.17",
+  "version": "2.0.29",
   "license": "ISC",
   "description": "A TypeScript/JavaScript API for interacting with the XRP Ledger in Node.js and the browser",
   "files": [
