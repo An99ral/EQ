@@ -85,7 +85,7 @@
       {
         "isSerialized": true,
         "isSigningField": true,
-        "isVLEncoded": false,
+        "isVLEncoded": true,
         "nth": 34,
         "type": "Blob"
       }
@@ -95,7 +95,7 @@
       {
         "isSerialized": true,
         "isSigningField": true,
-        "isVLEncoded": false,
+        "isVLEncoded": true,
         "nth": 35,
         "type": "Blob"
       }
@@ -3115,11 +3115,22 @@
       {
         "isSerialized": true,
         "isSigningField": true,
-        "isVLEncoded": false,
+        "isVLEncoded": true,
         "nth": 33,
         "type": "Blob"
       }
+    ],
+    [
+      "Vote",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 21,
+        "type": "UInt8"
+      }
     ]
+
   ],
   "LEDGER_ENTRY_TYPES": {
     "AMM": 121,
@@ -3411,7 +3422,14 @@
     "XChainCreateBridge": 48,
     "XChainCreateClaimID": 41,
     "XChainModifyBridge": 47,
-    "FundingPoolCreate": 151
+    "FundingPoolCreate": 151,
+    "FundingPoolDeposit": 152,
+    "FundingPoolSetJudges": 156,
+    "FundingPoolVote": 155,
+    "FundingPoolClose": 154,
+    "FundingPoolElimination": 165
+    
+
   },
   "TYPES": {
     "AccountID": 8,

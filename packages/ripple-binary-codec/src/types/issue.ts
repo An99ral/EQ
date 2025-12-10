@@ -105,7 +105,7 @@ class Issue extends SerializedType {
   static fromParser(parser: BinaryParser): Issue {
     // XRP
     const currencyOrAccount = parser.read(20)
-    if (new Currency(currencyOrAccount).toJSON() === 'XRP') {
+    if (new Currency(currencyOrAccount).toJSON() === 'EQ') {
       return new Issue(currencyOrAccount)
     }
 
@@ -148,7 +148,7 @@ class Issue extends SerializedType {
     const parser = new BinaryParser(this.toString())
 
     const currency = Currency.fromParser(parser) as Currency
-    if (currency.toJSON() === 'XRP') {
+    if (currency.toJSON() === 'EQ') {
       return { currency: currency.toJSON() }
     }
     const issuer = AccountID.fromParser(parser) as AccountID

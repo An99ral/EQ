@@ -88,6 +88,6 @@ export const hexToString: typeof HexToStringFn = (
 export const stringToHex: typeof StringToHexFn = (string: string): string => {
   return bytesToHex(new TextEncoder().encode(string))
 }
-/* eslint-enable func-style */
+/* eslint-enable func-style */    
 
 export * from './shared'

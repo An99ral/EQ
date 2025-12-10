@@ -1,6 +1,6 @@
 {
   "name": "eq-address-codec",
-  "version": "2.0.2",
+  "version": "2.0.11",
   "description": "encodes/decodes base58 encoded XRP Ledger identifiers",
   "files": [
     "dist/*",

@@ -381,11 +381,11 @@ export class Wallet {
   } {
     let multisignAddress: boolean | string = false
     if (typeof multisign === 'string') {
-      console.log('multisign string', multisign)
+      //console.log('multisign string', multisign)
       multisignAddress = multisign
     } else if (multisign) {
       multisignAddress = this.classicAddress
-      console.log('multisign boolean', multisignAddress)
+      //console.log('multisign boolean', multisignAddress)
     }
 
     // clean null & undefined valued tx properties
@@ -394,16 +394,16 @@ export class Wallet {
       { ...transaction },
       (value) => value == null,
     ) as unknown as Transaction
-    console.log('signing tx', tx)
+    //console.log('signing tx', tx)
     if (tx.TxnSignature || tx.Signers) {
       throw new ValidationError(
         'txJSON must not contain "TxnSignature" or "Signers" properties',
       )
-      console.log('Transaction contains TxnSignature or Signers properties')
+      // console.log('Transaction contains TxnSignature or Signers properties')
     }
 
     removeTrailingZeros(tx)
-    console.log('after removing trailing zeros', tx)
+
     /*
      * This will throw a more clear error for JS users if the supplied transaction has incorrect formatting
      */
@@ -411,7 +411,7 @@ export class Wallet {
     validate(tx as unknown as Record<string, unknown>)
     if (hasFlag(tx, GlobalFlags.tfInnerBatchTxn, 'tfInnerBatchTxn')) {
       throw new ValidationError('Cannot sign a Batch inner transaction.')
-      
+
     }
     const txToSignAndEncode = { ...tx }
 
@@ -435,7 +435,6 @@ export class Wallet {
       )
     }
     const serialized = encode(txToSignAndEncode)
-    console.log('serialized tx ', serialized)
     return {
       tx_blob: serialized,
       hash: hashSignedTx(serialized),

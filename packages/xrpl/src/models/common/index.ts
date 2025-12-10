@@ -5,7 +5,7 @@ export type APIVersion = typeof RIPPLED_API_V1 | typeof RIPPLED_API_V2
 export type LedgerIndex = number | ('validated' | 'closed' | 'current')
 
 export interface XRP {
-  currency: 'XRP'
+  currency: 'EQ'
   issuer?: never
 }
 

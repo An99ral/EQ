@@ -174,7 +174,7 @@ export function isCurrency(input: unknown): input is Currency {
       isString(input.issuer) &&
       isString(input.currency)) ||
       (Object.keys(input).length === XRP_CURRENCY_SIZE &&
-        input.currency === 'XRP') ||
+        input.currency === 'EQ') ||
       (Object.keys(input).length === MPT_CURRENCY_SIZE &&
         isString(input.mpt_issuance_id)))
   )
@@ -193,7 +193,7 @@ export function isIssuedCurrency(input: unknown): input is IssuedCurrency {
       isString(input.issuer) &&
       isString(input.currency)) ||
       (Object.keys(input).length === XRP_CURRENCY_SIZE &&
-        input.currency === 'XRP'))
+        input.currency === 'EQ'))
   )
 }
 

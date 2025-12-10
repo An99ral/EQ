@@ -123,7 +123,7 @@ export async function waitForFinalTransactionOutcome<
   if (lastLedger < latestLedger) {
     throw new XrplError(
       `The latest ledger sequence ${latestLedger} is greater than the transaction's LastLedgerSequence (${lastLedger}).\n` +
-        `Preliminary result: ${submissionResult}`,
+      `Preliminary result: ${submissionResult}`,
     )
   }
 
@@ -248,13 +248,13 @@ export async function getSignedTx(
   let tx =
     typeof transaction === 'string'
       ? // eslint-disable-next-line @typescript-eslint/consistent-type-assertions -- converts JsonObject to correct Transaction type
-        (decode(transaction) as unknown as SubmittableTransaction)
+      (decode(transaction) as unknown as SubmittableTransaction)
       : transaction
 
   if (autofill) {
     tx = await client.autofill(tx)
   }
-  console.log('Transaction before signing:', tx)
+  //console.log('Transaction before signing:', tx)
   return wallet.sign(tx).tx_blob
 }
 

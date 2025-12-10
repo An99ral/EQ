@@ -1,3 +1,4 @@
+/* eslint-disable prettier/prettier */
 /* eslint-disable max-lines -- need to work with a lot of transactions in a switch statement */
 /* eslint-disable max-lines-per-function -- need to work with a lot of Tx verifications */
 
@@ -127,6 +128,11 @@ import {
   validateXChainModifyBridge,
 } from './XChainModifyBridge'
 import { FundingPoolCreate, validateFundingPoolCreate } from './FundingPoolCreate'
+import { FundingPoolDeposit, validateFundingPoolDeposit } from './FundingPoolDeposit'
+import { FundingPoolSetJudges, validateFundingPoolSetJudges } from './FundingPoolSetJudges'
+import { FundingPoolVote, validateFundingPoolVote } from './FundingPoolVote'
+import { FundingPoolClose, validateFundingPoolClose } from './FundingPoolClose'
+import { FundingPoolElimination, validateFundingPoolElimination } from './FundingPoolElimination'
 /**
  * Transactions that can be submitted by clients
  *
@@ -196,6 +202,11 @@ export type SubmittableTransaction =
   | XChainCreateClaimID
   | XChainModifyBridge
   | FundingPoolCreate
+  | FundingPoolDeposit
+  | FundingPoolSetJudges
+  | FundingPoolVote
+  | FundingPoolClose
+  | FundingPoolElimination
 
 /**
  * Transactions that can only be created by validators.
@@ -243,7 +254,7 @@ export function validate(transaction: Record<string, unknown>): void {
 
       if (
         txCurrency.length === standard_currency_code_len &&
-        txCurrency.toUpperCase() === 'XRP'
+        txCurrency.toUpperCase() === 'EQ'
       ) {
         throw new ValidationError(
           `Cannot have an issued currency with a similar standard code to XRP (received '${txCurrency}'). XRP is not an issued currency.`,
@@ -513,6 +524,21 @@ export function validate(transaction: Record<string, unknown>): void {
       break
     case 'FundingPoolCreate':
       validateFundingPoolCreate(tx)
+      break
+    case 'FundingPoolDeposit':
+      validateFundingPoolDeposit(tx)
+      break
+    case 'FundingPoolSetJudges':
+      validateFundingPoolSetJudges(tx)
+      break
+    case 'FundingPoolVote':
+      validateFundingPoolVote(tx)
+      break
+    case 'FundingPoolClose':
+      validateFundingPoolClose(tx)
+      break
+    case 'FundingPoolElimination':
+      validateFundingPoolElimination(tx)
       break
 
     default:

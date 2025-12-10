@@ -24,7 +24,7 @@ export const hexToBytes: typeof HexToBytesFn = (hex): Uint8Array => {
   const len = hex.length
   const array = new Uint8Array(len / 2)
   if (!HEX_REGEX.test(hex)) {
-    throw new Error('Invalid hex string')
+    throw new Error('Invalid hex string') 
   }
   for (let i = 0; i < array.length; i++) {
     const j = i * 2

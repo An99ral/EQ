@@ -132,5 +132,8 @@ export {
   XChainModifyBridgeFlagsInterface,
 } from './XChainModifyBridge'
 export { FundingPoolCreate } from './FundingPoolCreate'
-
-
+export { FundingPoolDeposit } from './FundingPoolDeposit'
+export { FundingPoolSetJudges } from './FundingPoolSetJudges'
+export { FundingPoolVote } from './FundingPoolVote'
+export { FundingPoolElimination } from './FundingPoolElimination'
+export { FundingPoolClose } from './FundingPoolClose'

@@ -18,7 +18,7 @@ class XrplError extends Error {
    */
   public constructor(message = '', data?: unknown) {
     super(message)
-    console.log('Creando XrplError', this.constructor.name)
+    //console.log('Creando XrplError', this.constructor.name)
     this.name = this.constructor.name
     this.message = message
     this.data = data

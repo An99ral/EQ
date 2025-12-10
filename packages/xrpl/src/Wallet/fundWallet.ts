@@ -74,7 +74,7 @@ export function generateWalletToFund(wallet?: Wallet | null): Wallet {
   if (wallet && isValidClassicAddress(wallet.classicAddress)) {
     return wallet
   }
-  console.log('Generating new wallet to fund')
+  //console.log('Generating new wallet to fund')
   return Wallet.generate()
 }
 
@@ -168,7 +168,7 @@ export async function requestFunding(
       walletToFund,
       startingBalance,
     )
-  } console.log("esto es un fund wallet funcion proces 2")
+  } //console.log("esto es un fund wallet funcion proces 2")
   return processError(response, body)
 }
 
@@ -201,11 +201,10 @@ async function processSuccessfulResponse(
     }
   }
   throw new XRPLFaucetError(
-    `Unable to fund address with faucet after waiting ${
-      INTERVAL_SECONDS * MAX_ATTEMPTS
+    `Unable to fund address with faucet after waiting ${INTERVAL_SECONDS * MAX_ATTEMPTS
     } seconds`,
   )
-  console.log("eesto es un fund wallet funcion proces 1")
+  //console.log("eesto es un fund wallet funcion proces 1")
 }
 
 async function processError(response: Response, body): Promise<never> {

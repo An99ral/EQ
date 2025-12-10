@@ -2,7 +2,7 @@ import { Hash160 } from './hash-160'
 import { bytesToHex, hexToBytes, hexToString } from '@xrplf/isomorphic/utils'
 
 const XRP_HEX_REGEX = /^0{40}$/
-const ISO_REGEX = /^[A-Z0-9a-z?!@#$%^&*(){}[\]|]{3}$/
+const ISO_REGEX = /^[A-Z0-9a-z?!@#$%^&*(){}[\]|]{2,3}$/
 const HEX_REGEX = /^[A-F0-9]{40}$/
 // eslint-disable-next-line no-control-regex
 const STANDARD_FORMAT_HEX_REGEX = /^0{24}[\x00-\x7F]{6}0{10}$/
@@ -12,7 +12,7 @@ const STANDARD_FORMAT_HEX_REGEX = /^0{24}[\x00-\x7F]{6}0{10}$/
  */
 function isoToBytes(iso: string): Uint8Array {
   const bytes = new Uint8Array(20)
-  if (iso !== 'XRP') {
+  if (iso !== 'EQ') {
     const isoBytes = iso.split('').map((c) => c.charCodeAt(0))
     bytes.set(isoBytes, 12)
   }
@@ -23,12 +23,12 @@ function isoToBytes(iso: string): Uint8Array {
  * Tests if ISO is a valid iso code
  */
 function isIsoCode(iso: string): boolean {
-  return ISO_REGEX.test(iso)
+  return iso === 'EQ' || ISO_REGEX.test(iso)
 }
 
 function isoCodeFromHex(code: Uint8Array): string | null {
   const iso = hexToString(bytesToHex(code))
-  if (iso === 'XRP') {
+  if (iso === 'EQ') {
     return null
   }
   if (isIsoCode(iso)) {
@@ -48,7 +48,7 @@ function isHex(hex: string): boolean {
  * Tests if a string is a valid representation of a currency
  */
 function isStringRepresentation(input: string): boolean {
-  return input.length === 3 || isHex(input)
+  return input === 'EQ' || input.length === 3 || isHex(input)
 }
 
 /**
@@ -74,7 +74,15 @@ function bytesFromRepresentation(input: string): Uint8Array {
   if (!isValidRepresentation(input)) {
     throw new Error(`Unsupported Currency representation: ${input}`)
   }
-  return input.length === 3 ? isoToBytes(input) : hexToBytes(input)
+  if (isIsoCode(input)) {
+    return isoToBytes(input)
+  }
+
+  if (isHex(input)) {
+    return hexToBytes(input)
+  }
+
+  throw new Error(`Unsupported Currency representation: ${input}`)
 }
 
 /**
@@ -89,7 +97,7 @@ class Currency extends Hash160 {
     const hex = bytesToHex(this.bytes)
 
     if (XRP_HEX_REGEX.test(hex)) {
-      this._iso = 'XRP'
+      this._iso = 'EQ'
     } else if (STANDARD_FORMAT_HEX_REGEX.test(hex)) {
       this._iso = isoCodeFromHex(this.bytes.slice(12, 15))
     } else {

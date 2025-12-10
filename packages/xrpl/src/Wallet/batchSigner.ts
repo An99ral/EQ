@@ -151,7 +151,7 @@ export function combineBatchSigners(
   const batchTransactions = decodedTransactions as Batch[]
 
   validateBatchTransactionEquivalence(batchTransactions)
-  console.log('batchTransactions en xrpl src wallet ', batchTransactions)
+  //console.log('batchTransactions en xrpl src wallet ', batchTransactions)
   return encode(getTransactionWithAllBatchSigners(batchTransactions))
 }
 

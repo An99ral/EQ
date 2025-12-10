@@ -1,6 +1,6 @@
 {
   "name": "eq-binary-codec",
-  "version": "2.0.2",
+  "version": "2.0.16",
   "description": "XRP Ledger binary codec",
   "files": [
     "dist/*",

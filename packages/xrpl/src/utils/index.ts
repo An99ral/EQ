@@ -90,7 +90,7 @@ function isValidSecret(secret: string): boolean {
  * @returns A hex string representing the encoded object.
  */
 function encode(object: Transaction | LedgerEntry): string {
-  console.log('encode function called with object:', object)
+  //console.log('encode function called with object:', object)
   return rbcEncode(object)
 }
 

@@ -157,7 +157,7 @@ export function hashStateTree(entries: LedgerEntry[]): string {
 
   entries.forEach((ledgerEntry) => {
     const data = encode(ledgerEntry)
-    console.log('ledgerEntry index:', data)
+    //console.log('ledgerEntry index:', data)
     shamap.addItem(ledgerEntry.index, data, NodeType.ACCOUNT_STATE)
   })
 
@@ -183,7 +183,7 @@ function computeTransactionHash(
   if (transaction_hash !== transactionHash) {
     throw new ValidationError(
       'transactionHash in header' +
-        ' does not match computed hash of transactions',
+      ' does not match computed hash of transactions',
       {
         transactionHashInHeader: transaction_hash,
         computedHashOfTransactions: transactionHash,

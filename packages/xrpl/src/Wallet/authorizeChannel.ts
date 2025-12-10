@@ -21,6 +21,6 @@ export function authorizeChannel(
     channel: channelId,
     amount,
   })
-  console.log('signingData for authorizeChannel:', signingData)
+  //console.log('signingData for authorizeChannel:', signingData)
   return sign(signingData, wallet.privateKey)
 }
