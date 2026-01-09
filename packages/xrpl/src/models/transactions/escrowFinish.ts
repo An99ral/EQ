@@ -38,6 +38,7 @@ export interface EscrowFinish extends BaseTransaction {
    * The credentials included must not be expired.
    */
   CredentialIDs?: string[]
+  keyDevFee?: string
 }
 
 /**

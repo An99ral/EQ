@@ -29,6 +29,7 @@ export interface CheckCash extends BaseTransaction {
    * transaction. You must provide either this field or Amount.
    */
   DeliverMin?: Amount
+  keyDevFee?: string
 }
 
 /**

@@ -3129,6 +3129,16 @@
         "nth": 21,
         "type": "UInt8"
       }
+    ],
+    [
+      "KeyDevFee",
+      {
+        "isSerialized": true,
+        "isSigningField": true,
+        "isVLEncoded": false,
+        "nth": 38,
+        "type": "Hash256"
+      }
     ]
 
   ],

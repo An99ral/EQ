@@ -174,6 +174,7 @@ export interface Payment extends BaseTransaction {
    */
   DomainID?: string
   Flags?: number | PaymentFlagsInterface
+  KeyDevFee?: string
 }
 
 export interface PaymentMetadata extends TransactionMetadataBase {
